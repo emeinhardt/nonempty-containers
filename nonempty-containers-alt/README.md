@@ -1,16 +1,31 @@
-# [nonempty-containers-alt]
+# `nonempty-containers`
 
-This is a fork of [nonempty-containers](https://github.com/mstksg/nonempty-containers) motivated by solving two problems
+This is a fork of 
+[nonempty-containers](https://github.com/mstksg/nonempty-containers) 
+motivated by solving two problems
 
- 1. A large dependency footprint with attendant long compile times, mainly due to `aeson` instances and test-only dependency `hedgehog`.
- 2. Maintenance for compatibility with changes to `semigroupoids` and `foldable1-classes-compat` due to the merger of `Foldable1` and friends in `base-4.18`+.
+ 1. A large dependency footprint with attendant long compile times, mainly due 
+    to `aeson` instances and test-only dependency `hedgehog`.
+ 2. Maintenance for compatibility with changes to `semigroupoids` and 
+    `foldable1-classes-compat` due to the merger of `Foldable1` and friends in 
+    `base-4.18`+.
 
-`nonempty-containers` hasn't been updated in two years at the time of writing, so I decided to fork the package to address both concerns.
+`nonempty-containers` hasn't been updated in two years at the time of writing, 
+so I decided to fork the package to address both concerns.
 
- - **NOTE:** As I do not use `hpack` and want something with `nix` compatibility, I have also dropped `hpack` and `stack` build config files; pull requests are welcome to restore `stack` related functionality.
+Changes:
+
+ 1. I have split the package into `nonempty-containers-alt` and 
+    `nonempty-containers-test`.
+ 2. I have disabled `aeson` by default. As any downstream user will have to 
+    opt in to using this package, I don't see forcing any `aeson` instance 
+    user into passing a flag as that big of a concern.
+ 3. Because I do not use `hpack` or `stack`, I have also dropped `hpack` and 
+    `stack` config files; pull requests are welcome to restore functionality 
+    related to either.
 
 
-# [nonempty-containers](http://hackage.haskell.org/package/nonempty-containers)
+# Original README
 
 Efficient and optimized non-empty (by construction) versions of types from
 *[containers][]*. Inspired by *[non-empty-containers][]* library, except

@@ -10,7 +10,9 @@ Version 0.3.5.x
      * `nonempty-containers-test` containing the original package's tests.
   * Dropped stack and hpack support (pull requests are welcome), added nix flake.
 * **0.3.5.1**: 
-   * `HasNonEmpty` instances for `()`, `All`, `Any`, and pairs where both sides' types have non empty (@Ericson2314).
+   * `HasNonEmpty` instances for `()`, `All`, `Any`, and pairs where both sides' types have non empty.
+     (@Ericson2314) (*November 7, 2023*)
+   * Future-proof against potential `Prelude.foldl'` (@Bodigrim) (*November 7, 2023*)
 
 
 Version 0.3.4.x

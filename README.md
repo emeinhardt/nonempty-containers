@@ -1,5 +1,15 @@
 # [nonempty-containers][]
 
+This is a fork of [nonempty-containers](https://github.com/mstksg/nonempty-containers) motivated by solving two problems
+
+ 1. A large dependency footprint with attendant long compile times, mainly due to `aeson` instances and test-only dependency `hedgehog`.
+ 2. Maintenance for compatibility with changes to `semigroupoids` and `foldable1-classes-compat` due to the merger of `Foldable1` and friends in `base-4.18`+.
+
+`nonempty-containers` hasn't been updated in two years at the time of writing, so I decided to fork the package to address both concerns.
+
+As I do not use `hpack` and want something with `nix` compatibility, I have also dropped `hpack` and `stack` build config files; pull requests are welcome to restore `stack` related functionality.
+
+
 [nonempty-containers]: http://hackage.haskell.org/package/nonempty-containers
 
 Efficient and optimized non-empty (by construction) versions of types from

@@ -1,6 +1,6 @@
 cabal-version:  3.0
 name:           nonempty-containers-alt
-version:        0.3.5.0
+version:        0.3.5.1
 synopsis:       Non-empty variants of containers data types, with full API.
 description:    This is a fork of @nonempty-containers@ with a smaller obligatory dependency footprint:
                 @aeson@ instances are opt-in (via a flag) and package tests have been moved into
@@ -68,6 +68,7 @@ library
     , nonempty-vector
     , semigroupoids
     , these
+    , semialign
     , vector
   if flag(aeson)
     build-depends: aeson

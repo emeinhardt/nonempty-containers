@@ -1,15 +1,17 @@
 Changelog
 =========
 
-Version 0.3.5.0
+Version 0.3.5.x
 ---------------
 
-Forked to `nonempty-containers-alt`:
+* **0.3.5.0**:
+  * Split package into 
+     * `nonempty-containers-alt` (with no `aeson` instances unless a flag is passed) and no `test` component).
+     * `nonempty-containers-test` containing the original package's tests.
+  * Dropped stack and hpack support (pull requests are welcome), added nix flake.
+* **0.3.5.1**: 
+   * `HasNonEmpty` instances for `()`, `All`, `Any`, and pairs where both sides' types have non empty (@Ericson2314).
 
-* Split package into 
-    * `nonempty-containers-alt` (with no `aeson` instances unless a flag is passed) and no `test` component).
-    * `nonempty-containers-test` containing the original package's tests.
-* Dropped stack and hpack support (pull requests are welcome), added nix flake.
 
 Version 0.3.4.x
 ---------------

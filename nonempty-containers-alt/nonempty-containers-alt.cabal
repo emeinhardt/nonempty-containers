@@ -1,17 +1,19 @@
 cabal-version:  3.0
-name:           nonempty-containers
+name:           nonempty-containers-alt
 version:        0.3.5.0
 synopsis:       Non-empty variants of containers data types, with full API.
-description:    Fork of nonempty-containers with updates + allowing a smaller dependency footprint.
+description:    This is a fork of @nonempty-containers@ with a smaller obligatory dependency footprint:
+                @aeson@ instances are opt-in (via a flag) and package tests have been moved into
+                @nonempty-containers-test@.
                  
-                Efficient and optimized non-empty versions of types from /containers/.
-                Inspired by /non-empty-containers/ library, except attempting a more
-                faithful port (with under-the-hood optimizations) of the full /containers/
+                Efficient and optimized non-empty versions of types from @containers@.
+                Inspired by @non-empty-containers@ library, except attempting a more
+                faithful port (with under-the-hood optimizations) of the full @containers@
                 API. Also contains a convenient typeclass abstraction for converting
                 betwewen non-empty and possibly-empty variants. See README.md for more
                 information.
 category:       Data
-homepage:       https://github.com/emeinhardt/nonempty-containers#readme
+homepage:       https://github.com/emeinhardt/nonempty-containers/nonempty-containers-alt#readme
 bug-reports:    https://github.com/emeinhardt/nonempty-containers/issues
 author:         Justin Le
 maintainer:     justin@jle.im
@@ -26,6 +28,15 @@ extra-source-files:
 source-repository head
   type: git
   location: https://github.com/emeinhardt/nonempty-containers
+
+flag aeson
+  description:
+    You can enable the use of the `aeson` package using `-f-aeson`.
+
+    If disabled the package will not supply instances of `Aeson` types.
+  default: False
+  manual:  False
+
 
 common warnings
   ghc-options:  -Wall -Wdefault -Wno-orphans -Wredundant-constraints -Wincomplete-uni-patterns -Wincomplete-record-updates -Wcompat
@@ -48,11 +59,8 @@ library
     Data.Sequence.NonEmpty.Internal
     Data.Set.NonEmpty
     Data.Set.NonEmpty.Internal
-  other-modules:
-    Paths_nonempty_containers
   build-depends:
-      aeson
-    , base >=4.9 && <5
+      base >=4.9 && <5
     , comonad
     , containers >=0.5.9
     , deepseq
@@ -61,35 +69,5 @@ library
     , semigroupoids
     , these
     , vector
-
-
-test-suite nonempty-containers-test
-  default-language: Haskell2010
-  ghc-options: -Wall -Wcompat -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
-  type: exitcode-stdio-1.0
-  hs-source-dirs:
-      test
-  main-is: Spec.hs
-  other-modules:
-      Tests.IntMap
-      Tests.IntSet
-      Tests.Map
-      Tests.Sequence
-      Tests.Set
-      Tests.Util
-      Paths_nonempty_containers
-  build-depends:
-      base >=4.9 && <5
-    , comonad
-    , containers >=0.5.9
-    , hedgehog >=1.0
-    , hedgehog-fn >=1.0
-    , invariant
-    , nonempty-containers
-    , nonempty-vector
-    , semigroupoids
-    , tasty
-    , tasty-hedgehog >=1.0
-    , text
-    , these
-    , vector
+  if flag(aeson)
+    build-depends: aeson

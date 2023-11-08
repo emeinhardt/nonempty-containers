@@ -66,7 +66,9 @@ import           Data.Semigroup.Traversable
 import           Data.Sequence              (Seq(..))
 import           Prelude hiding             (length, zipWith, unzip, zip, map, replicate)
 import           Text.Read
+#ifdef MIN_VERSION_aeson
 import qualified Data.Aeson                 as A
+#endif
 import qualified Data.Foldable              as F
 import qualified Data.Sequence              as Seq
 
@@ -195,6 +197,7 @@ seqDataType :: DataType
 seqDataType = mkDataType "Data.Sequence.NonEmpty.Internal.NESeq" [consConstr]
 
 
+#ifdef MIN_VERSION_aeson
 instance A.ToJSON a => A.ToJSON (NESeq a) where
     toJSON     = A.toJSON . toSeq
     toEncoding = A.toEncoding . toSeq
@@ -204,6 +207,7 @@ instance A.FromJSON a => A.FromJSON (NESeq a) where
             <=< A.parseJSON
       where
         err = "NESeq: Non-empty sequence expected, but empty sequence found"
+#endif
 
 
 -- | /O(log n)/. A general continuation-based way to consume a 'Seq' as if

@@ -41,7 +41,9 @@ import           Data.List.NonEmpty      (NonEmpty(..))
 import           Data.Semigroup
 import           Data.Semigroup.Foldable (Foldable1)
 import           Text.Read
+#ifdef MIN_VERSION_aeson
 import qualified Data.Aeson              as A
+#endif
 import qualified Data.Foldable           as F
 import qualified Data.IntSet             as S
 import qualified Data.Semigroup.Foldable as F1
@@ -132,6 +134,7 @@ intSetDataType :: DataType
 intSetDataType = mkDataType "Data.IntSet.NonEmpty.Internal.NEIntSet" [fromListConstr]
 
 
+#ifdef MIN_VERSION_aeson
 instance A.ToJSON NEIntSet where
     toJSON     = A.toJSON . toSet
     toEncoding = A.toEncoding . toSet
@@ -141,6 +144,7 @@ instance A.FromJSON NEIntSet where
             <=< A.parseJSON
       where
         err = "NEIntSet: Non-empty set expected, but empty set found"
+#endif
 
 
 -- | /O(log n)/. Smart constructor for an 'NEIntSet' from a 'IntSet'.  Returns

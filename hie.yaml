@@ -1,0 +1,6 @@
+cradle:
+  cabal:
+    - path: "./nonempty-containers-alt/src"
+      component: "lib:nonempty-containers-alt"
+    - path: "./nonempty-containers-test/src"
+      component: "lib:nonempty-containers-test"

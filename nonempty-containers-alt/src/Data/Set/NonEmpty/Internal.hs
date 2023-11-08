@@ -54,7 +54,9 @@ import           Data.Semigroup.Foldable (Foldable1)
 import           Data.Set.Internal       (Set(..))
 import           Prelude hiding          (foldr, foldr1, foldl, foldl1)
 import           Text.Read
+#ifdef MIN_VERSION_aeson
 import qualified Data.Aeson              as A
+#endif
 import qualified Data.Foldable           as F
 import qualified Data.Semigroup.Foldable as F1
 import qualified Data.Set                as S
@@ -162,6 +164,7 @@ setDataType :: DataType
 setDataType = mkDataType "Data.Set.NonEmpty.Internal.NESet" [fromListConstr]
 
 
+#ifdef MIN_VERSION_aeson
 instance A.ToJSON a => A.ToJSON (NESet a) where
     toJSON     = A.toJSON . toSet
     toEncoding = A.toEncoding . toSet
@@ -171,6 +174,7 @@ instance (A.FromJSON a, Ord a) => A.FromJSON (NESet a) where
             <=< A.parseJSON
       where
         err = "NESet: Non-empty set expected, but empty set found"
+#endif
 
 
 -- | /O(log n)/. Smart constructor for an 'NESet' from a 'Set'.  Returns

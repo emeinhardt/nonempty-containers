@@ -73,7 +73,9 @@ import           Data.Semigroup.Foldable    (Foldable1(fold1))
 import           Data.Semigroup.Traversable (Traversable1(..))
 import           Prelude hiding             (foldr1, foldl1, foldr, foldl, map)
 import           Text.Read
+#ifdef MIN_VERSION_aeson
 import qualified Data.Aeson                 as A
+#endif
 import qualified Data.Foldable              as F
 import qualified Data.IntMap                as M
 import qualified Data.List                  as L
@@ -189,6 +191,7 @@ fromListConstr = mkConstr intMapDataType "fromList" [] Prefix
 intMapDataType :: DataType
 intMapDataType = mkDataType "Data.IntMap.NonEmpty.Internal.NEIntMap" [fromListConstr]
 
+#ifdef MIN_VERSION_aeson
 instance A.ToJSON a => A.ToJSON (NEIntMap a) where
     toJSON     = A.toJSON . toMap
     toEncoding = A.toEncoding . toMap
@@ -198,6 +201,7 @@ instance A.FromJSON a => A.FromJSON (NEIntMap a) where
             <=< A.parseJSON
       where
         err = "NEIntMap: Non-empty map expected, but empty map found"
+#endif
 
 -- | @since 0.3.4.4
 instance Alt NEIntMap where

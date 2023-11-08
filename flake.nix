@@ -18,13 +18,18 @@
         jailbreakUnbreak = pkg:
           pkgs.haskell.lib.doJailbreak (pkg.overrideAttrs (_: { meta = { }; }));
 
-        packageName = "nonempty-containers";
-      in {
-        packages.${packageName} =
-          haskellPackages.callCabal2nix packageName self rec {
-          };
+        overlay = self: super: {
+          nonempty-containers-alt  = self.callCabal2nix "nonempty-containers-alt"  ./nonempty-containers-alt  { };
+          nonempty-containers-test = self.callCabal2nix "nonempty-containers-test" ./nonempty-containers-test { };
+        };
+        haskellPackages' = haskellPackages.extend overlay;
 
-        packages.default = self.packages.${system}.${packageName};
+      in {
+
+        packages = {
+          inherit (haskellPackages') nonempty-containers-alt nonempty-containers-test;
+          default = haskellPackages'.nonempty-containers-alt;
+        };
         defaultPackage = self.packages.${system}.default;
 
         devShells.default = pkgs.mkShell {
@@ -32,13 +37,15 @@
 
             cabal-install
 
-            haskellPackages.haskell-language-server
+            haskellPackages'.haskell-language-server
 
-            haskellPackages.hlint
+            haskellPackages'.hlint
 
           ];
           inputsFrom = map (__getAttr "env") (__attrValues self.packages.${system});
         };
         devShell = self.devShells.${system}.default;
+
       });
 }
+

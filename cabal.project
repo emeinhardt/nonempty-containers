@@ -1,5 +1,6 @@
 packages:
-  ./*.cabal
+  ./nonempty-containers-alt/*.cabal
+  ./nonempty-containers-test/*.cabal
 
 package *
   haddock-html: true

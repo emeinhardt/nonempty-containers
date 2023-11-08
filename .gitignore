@@ -1,4 +1,7 @@
 *~
 .ghc.environment.*
 dist-newstyle/
+result
+result-*
+.envrc
 tags

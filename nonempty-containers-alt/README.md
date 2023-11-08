@@ -1,4 +1,4 @@
-# [nonempty-containers-alt][]
+# [nonempty-containers-alt]
 
 This is a fork of [nonempty-containers](https://github.com/mstksg/nonempty-containers) motivated by solving two problems
 
@@ -7,10 +7,10 @@ This is a fork of [nonempty-containers](https://github.com/mstksg/nonempty-conta
 
 `nonempty-containers` hasn't been updated in two years at the time of writing, so I decided to fork the package to address both concerns.
 
-As I do not use `hpack` and want something with `nix` compatibility, I have also dropped `hpack` and `stack` build config files; pull requests are welcome to restore `stack` related functionality.
+ - **NOTE:** As I do not use `hpack` and want something with `nix` compatibility, I have also dropped `hpack` and `stack` build config files; pull requests are welcome to restore `stack` related functionality.
 
 
-[nonempty-containers]: http://hackage.haskell.org/package/nonempty-containers
+# [nonempty-containers](http://hackage.haskell.org/package/nonempty-containers)
 
 Efficient and optimized non-empty (by construction) versions of types from
 *[containers][]*. Inspired by *[non-empty-containers][]* library, except
